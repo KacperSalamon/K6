@@ -37,8 +37,18 @@ export function Authorization() {
 
     const request = http.post(url, payload);
 
-    check(res, {
+    check(request, {
         'status code = 200' : (r) => r.status == 200,
         'body includes password' : (r) => r.body.includes("password"),
     })
+
+    sleep(2);
 }
+
+export function Users() {
+    let request = http.get("http://jsonplaceholder.typicode.com/users")
+    check(request, {
+        'body is not empty' : (r) => r.body.length > 0
+    })
+}
+
